@@ -55,18 +55,18 @@ class PersonDetect:
         self.output_shape=self.model.outputs[self.output_name].shape
 
     def load_model(self):
-    '''
-    TODO: This method needs to be completed by you
-    '''
+        '''
+        TODO: This method needs to be completed by you
+        '''
         self.core = IECore()
         self.net = self.core.load_network(network=self.model, device_name=self.device, num_requests=1)
         
         return
         
     def predict(self, frame, initial_w, initial_h):
-    '''
-    TODO: This method needs to be completed by you
-    '''
+        '''
+        TODO: This method needs to be completed by you
+        '''
         
         input_img = self.preprocess_input(frame)
         
@@ -84,9 +84,10 @@ class PersonDetect:
         return coords, frame
     
     def draw_outputs(self, coords, frame, initial_w, initial_h):
-    '''
-    TODO: This method needs to be completed by you
-    '''
+        '''
+        TODO: This method needs to be completed by you
+        '''
+        
         objects = []
         
         for obj in coords[0][0]:
@@ -99,18 +100,19 @@ class PersonDetect:
         return frame, objects
 
     def preprocess_outputs(self, outputs):
-    '''
-    TODO: This method needs to be completed by you
-    '''
+        '''
+        TODO: This method needs to be completed by you
+        '''
+        
         output_dict = {self.output_name : output for output in outputs}
         
         return output_dict
 
     def preprocess_input(self, image):
-    '''
-    TODO: This method needs to be completed by you
-    '''
-        p_frame = cv2.resize(image, (input_shape[3], input_shape[2]))
+        '''
+        TODO: This method needs to be completed by you
+        '''
+        p_frame = cv2.resize(image, (self.input_shape[3], self.input_shape[2]))
         p_frame = p_frame.transpose((2,0,1))
         p_frame = p_frame.reshape(1, *p_frame.shape)
         
